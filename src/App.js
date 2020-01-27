@@ -1,12 +1,25 @@
 import React from 'react';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
+
 import Login from './containers/Login/Login';
+import Timeline from './containers/Timeline/Timeline';
+
+import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route path="/timeline" component={Timeline} />
+        <Redirect to="/" />
+      </Switch>
+    </Router>
   );
 }
 

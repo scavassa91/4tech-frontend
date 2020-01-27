@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { user } from '../../services/user';
+import { login } from '../../services/auth';
 
 import { Button, TextField, Grid, Paper, Typography } from '@material-ui/core';
 
@@ -11,16 +13,26 @@ const Login = () => {
     const [fullName, setFullName] = useState('');
     const [userLogin, setUserLogin] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
 
     const onLoginChange = (event) => {
         setUserLogin(event.target.value);
     };
 
-    const onRegister = (event) => {
+    const onRegister = async (event) => {
         event.preventDefault();
-        const response = user.register(userLogin, fullName, password);
+        const response = await user.register(userLogin, fullName, password);
         console.log(response);
     };
+
+    const onLogin = async (event) => {
+        event.preventDefault();
+        const response = await login(userLogin, password);
+        if (response.status >= 200 && response.status < 300) {
+            history.push('/timeline');
+        }
+        console.log(response);
+    }
 
     const renderLogin = () => {
         return (
@@ -81,7 +93,7 @@ const Login = () => {
         <div className="login">
             <Grid item xs={2} className="grid">
                 <Paper className="paper">
-                    <form onSubmit={onRegister} >
+                    <form onSubmit={isLogin ? onLogin : onRegister} >
                         <Typography variant="h6">
                             4T Insta
                         </Typography>
