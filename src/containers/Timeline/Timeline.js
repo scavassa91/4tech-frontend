@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Header from '../../components/Header/Header';
 
 const Timeline = () => {
     return (
-        <div>Timeline works!!!</div>
+        <Fragment>
+            <Header />
+        </Fragment>
     );
 };
 

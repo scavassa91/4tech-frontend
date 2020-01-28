@@ -1,0 +1,6 @@
+.header .toolbar {
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 750px;
+    padding: 0;
+}
